@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+        
+        .contributors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .name-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .name-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .instructions {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .instructions h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #555;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .instructions code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Contributors ✨</h1>
+        <p class="subtitle">People who contributed to this project</p>
+        
+        <div class="contributors" id="contributorsList"></div>
+        
+        <div class="instructions">
+            <h2>📝 How to Add Your Name</h2>
+            <ol>
+                <li>Clone this repository: <code>git clone [repo-url]</code></li>
+                <li>Open <code>contributors.json</code></li>
+                <li>Add your name to the list</li>
+                <li>Commit: <code>git add contributors.json && git commit -m "Add [YourName]"</code></li>
+                <li>Push: <code>git push origin main</code></li>
+                <li>Create a Pull Request</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        // Load contributors from JSON
+        fetch('contributors.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('contributorsList');
+                data.contributors.forEach(name => {
+                    const card = document.createElement('div');
+                    card.className = 'name-card';
+                    card.textContent = name;
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error('Error loading contributors:', error));
+    </script>
+</body>
+</html>
